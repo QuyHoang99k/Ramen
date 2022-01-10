@@ -52,7 +52,6 @@ class AdminProfileController extends Controller
         $validateData = $request->validate([
             'oldpassword' => 'required',
             'password' => 'required|confirmed',
-
         ]);
         $hashedPassword = Admin::find(1)->password;
         if(Hash::check($request->oldpassword,$hashedPassword)){
