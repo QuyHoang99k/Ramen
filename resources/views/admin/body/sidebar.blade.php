@@ -23,46 +23,69 @@ $route = Route::current()->getName();
         <!-- sidebar menu-->
         <ul class="sidebar-menu" data-widget="tree">
 
-            <li class="{{ ($route == 'dashboard')? 'active':'' }}">
+            <li class="{{ $route == 'dashboard' ? 'active' : '' }}">
                 <a href="{{ url('admin/dashboard') }}">
                     <i data-feather="pie-chart"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
-            <li class="treeview {{($prefix == '/brand') ? 'active':''  }}">
+            <li class="treeview {{ $prefix == '/brand' ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa-solid fa-map-location"></i>
                     <span>Khu Vực<u></u></span>
 
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'all.brand')? 'active':'' }}"><a href="{{ route('all.brand') }}"><i class="ti-more"></i>Danh Sách Khu Vực</a></li>
+                    <li class="{{ $route == 'all.brand' ? 'active' : '' }}"><a href="{{ route('all.brand') }}"><i
+                                class="ti-more"></i>Danh Sách Khu Vực</a></li>
                 </ul>
             </li>
 
-            <li class="treeview {{($prefix == '/category') ? 'active':''  }}">
+            <li class="treeview {{ $prefix == '/category' ? 'active' : '' }}">
 
                 <a href="#">
                     <i class="fa-duotone fa-list-dropdown"></i> <span>Category</span>
 
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'all.category')? 'active':'' }}"><a  href="{{ route('all.category') }}"><i class="ti-more"></i>All Category</a></li>
-                    <li class="{{ ($route == 'all.subcategory')? 'active':'' }}"><a href="{{ route('all.subcategory') }}"><i class="ti-more"></i>All SubCategory</a></li>
-                    <li class="{{ ($route == 'all.subsubcategory')? 'active':'' }}"><a href="{{ route('all.subsubcategory') }}"><i class="ti-more"></i>All Sub->SubCategory</a></li>
+                    <li class="{{ $route == 'all.category' ? 'active' : '' }}"><a
+                            href="{{ route('all.category') }}"><i class="ti-more"></i>All Category</a></li>
+                    <li class="{{ $route == 'all.subcategory' ? 'active' : '' }}"><a
+                            href="{{ route('all.subcategory') }}"><i class="ti-more"></i>All SubCategory</a>
+                    </li>
+                    <li class="{{ $route == 'all.subsubcategory' ? 'active' : '' }}"><a
+                            href="{{ route('all.subsubcategory') }}"><i class="ti-more"></i>All
+                            Sub->SubCategory</a></li>
                 </ul>
             </li>
 
-            <li class="treeview {{($prefix == '/product') ? 'active':''  }}">
+            <li class="treeview {{ $prefix == '/product' ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa-brands fa-product-hunt"></i>
                     <span>Products</span>
 
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'add-product')? 'active':'' }}"><a href={{ route('add-product') }}><i class="ti-more"></i>Thêm Sản Phẩm</a></li>
-                    <li ><a href="invoice.html"><i class="ti-more"></i>Quản Lý Sản Phẩm</a></li>
+                    <li class="{{ $route == 'add-product' ? 'active' : '' }}"><a href={{ route('add-product') }}><i
+                                class="ti-more"></i>Thêm Sản Phẩm</a></li>
+                    <li class="{{ $route == 'manage-product' ? 'active' : '' }}"><a
+                            href={{ route('manage-product') }}><i class="ti-more"></i>Quản Lý Sản Phẩm</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="treeview {{ $prefix == '/slider' ? 'active' : '' }}">
+                <a href="#">
+                    <i class="fa-brands fa-product-hunt"></i>
+                    <span>Slider</span>
+
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'manage-slider' ? 'active' : '' }}"><a
+                            href={{ route('manage-slider') }}><i class="ti-more"></i>Quản Lý Slider</a>
+                    </li>
 
                 </ul>
             </li>
