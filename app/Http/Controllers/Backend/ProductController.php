@@ -21,7 +21,7 @@ class ProductController extends Controller
     {
         $categories = Category::latest()->get();
         $brands = Brand::latest()->get();
-        return view('backend.product.product_add',compact('categories','brands'));
+        return view('backend.product.product_add', compact('categories', 'brands'));
     }
 
     public function StoreProduct(Request $request)
@@ -76,19 +76,19 @@ class ProductController extends Controller
         // Multiple Image Upload Start
 
         $images = $request->file('multi_img');
-        foreach ($images as $img) {
-            $make_name = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
-            Image::make($img)->resize(917, 1000)->save(public_path('upload/products/multi-image/' . $make_name));
-            $uploadPath = 'upload/products/multi-image/' . $make_name;
-            MultiImg::insert([
-                'product_id' => $product_id,
-                'photo_name' => $uploadPath,
-                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
-            ]);
+        if ($request->hasFile('multi_img')) {
+            foreach ($images as $img) {
+                $make_name = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
+                Image::make($img)->resize(917, 1000)->save(public_path('upload/products/multi-image/' . $make_name));
+                $uploadPath = 'upload/products/multi-image/' . $make_name;
+                MultiImg::insert([
+                    'product_id' => $product_id,
+                    'photo_name' => $uploadPath,
+                    'created_at' => Carbon::now(),
+                ]);
+            }
         }
-
         // Een Multiple Image Upload Start
-
         $notification = array(
             'message' => 'Product Inserted Successfully',
             'alert-type' => 'success'
@@ -99,7 +99,7 @@ class ProductController extends Controller
     public function ManageProduct()
     {
         $products = Product::latest()->get();
-        return view('backend.product.product_view',compact('products'));
+        return view('backend.product.product_view', compact('products'));
     }
     public function EditProduct($id)
     {

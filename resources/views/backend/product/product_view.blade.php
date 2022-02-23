@@ -27,6 +27,7 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Ảnh Sản Phẩm </th>
                                             <th>Tên Sản Phẩm</th>
                                             <th>Giá Sản Phẩm </th>
@@ -39,6 +40,7 @@
                                     <tbody>
                                         @foreach ($products as $item)
                                             <tr>
+                                                <td>{{ $item->id }}</td>
                                                 <td> <img src="{{ asset($item->product_thambnail) }}"
                                                         style="width: 60px; height: 50px;"> </td>
                                                 <td>{{ $item->product_name_en }}</td>
@@ -90,9 +92,6 @@
                                                             class="btn btn-success" title="Active Now"><i
                                                                 class="fa fa-arrow-up"></i> </a>
                                                     @endif
-
-
-
 
                                                 </td>
 

@@ -418,7 +418,7 @@
                                     <div class="col-md-3">
                                         <div class="card">
                                             <img src="{{ asset($img->photo_name) }}" class="card-img-top"
-                                                style="height: 130px; width: 280px;">
+                                                style="height: 180px; width: 280px;">
                                             <div class="card-body">
                                                 <h5 class="card-title">
                                                     <a href="{{ route('product.multiimg.delete', $img->id) }}"
@@ -469,7 +469,7 @@
                                 <div class="col-md-3">
                                     <div class="card">
                                         <img src="{{ asset($products->product_thambnail) }}" class="card-img-top"
-                                            style="height: 130px; width: 280px;">
+                                            style="height: 180px; width: 280px;">
                                         <div class="card-body">
                                             <p class="card-text">
                                             <div class="form-group">
