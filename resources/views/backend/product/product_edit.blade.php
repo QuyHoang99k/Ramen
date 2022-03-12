@@ -330,7 +330,7 @@
                                                 <div class="form-group">
                                                     <h5>Long Description English <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea id="editor1" name="long_descp_en" rows="10" cols="80"
+                                                        <textarea  name="long_descp_en" rows="10" cols="80"
                                                             required="">{!! $products->long_descp_en !!}</textarea>
                                                     </div>
                                                 </div>
@@ -340,7 +340,7 @@
                                                 <div class="form-group">
                                                     <h5>Long Description Hindi <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea id="editor2" name="long_descp_ja" rows="10" cols="80">{!! $products->long_descp_ja !!}
+                                                        <textarea name="long_descp_ja" rows="10" cols="80">{!! $products->long_descp_ja !!}
                                                             </textarea>
                                                     </div>
                                                 </div>

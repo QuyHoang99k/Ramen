@@ -12,7 +12,7 @@
 	// instance, using default configuration.
 	CKEDITOR.replace('editor1')
 	//bootstrap WYSIHTML5 - text editor
-	$('.textarea').wysihtml5();
+	// $('.textarea').wysihtml5();
 
   });
   $(function () {
@@ -22,7 +22,7 @@
 	// instance, using default configuration.
 	CKEDITOR.replace('editor2')
 	//bootstrap WYSIHTML5 - text editor
-	$('.textarea').wysihtml5();
+	// $('.textarea').wysihtml5();
 
   });
 

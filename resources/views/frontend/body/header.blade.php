@@ -7,11 +7,19 @@
                 <div class="cnt-account">
                     <ul class="list-unstyled">
                         <li><a href="#"><i class="icon fa fa-user"></i>
-                                @if (session()->get('language') == 'japan') アカウント  @else Tài Khoản  @endif
+                                @if (session()->get('language') == 'japan')
+                                    アカウント
+                                @else
+                                    Tài Khoản
+                                @endif
                             </a></li>
                         <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
                         <li><a href="#"><i class="icon fa fa-shopping-cart"></i>
-                                @if (session()->get('language') == 'japan') カート  @else Giỏ Hàng @endif
+                                @if (session()->get('language') == 'japan')
+                                    カート
+                                @else
+                                    Giỏ Hàng
+                                @endif
 
                             </a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
@@ -39,7 +47,11 @@
                         </li>
                         <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown"
                                 data-toggle="dropdown"><span class="value">
-                                    @if (session()->get('language') == 'japan') 言語 @else Ngôn Ngữ @endif
+                                    @if (session()->get('language') == 'japan')
+                                        言語
+                                    @else
+                                        Ngôn Ngữ
+                                    @endif
                                 </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 @if (session()->get('language') == 'japan')
@@ -106,41 +118,32 @@
                 <!-- /.top-search-holder -->
 
                 <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
-                    <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
+                    <!-- SHOPPING CART DROPDOWN -->
 
                     <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart"
                             data-toggle="dropdown">
                             <div class="items-cart-inner">
                                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
-                                <div class="basket-item-count"><span class="count">2</span></div>
+                                <div class="basket-item-count"><span class="count" id="cartQty"></span></div>
                                 <div class="total-price-basket"> <span class="lbl">cart -</span> <span
-                                        class="total-price"> <span class="sign">$</span><span
-                                            class="value">600.00</span> </span> </div>
+                                        class="total-price">
+                                        <span class="value" id="cartSubTotal"></span><span class="sign">円</span> </span> </div>
                             </div>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <div class="cart-item product-summary">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <div class="image"> <a href="detail.html"><img
-                                                        src="assets/images/cart.jpg" alt=""></a> </div>
-                                        </div>
-                                        <div class="col-xs-7">
-                                            <h3 class="name"><a href="index.php?page-detail">Simple
-                                                    Product</a></h3>
-                                            <div class="price">$600.00</div>
-                                        </div>
-                                        <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a>
-                                        </div>
-                                    </div>
+                                {{-- Mini Cart Start with Ajax --}}
+                                <div id="minicart">
+
                                 </div>
+                                {{-- End Mini Cart Start with Ajax --}}
+
                                 <!-- /.cart-item -->
                                 <div class="clearfix"></div>
                                 <hr>
                                 <div class="clearfix cart-total">
                                     <div class="pull-right"> <span class="text">Sub Total :</span><span
-                                            class='price'>$600.00</span> </div>
+                                            class='price' id="cartSubTotal"></span><span>円</span> </div>
                                     <div class="clearfix"></div>
                                     <a href="checkout.html"
                                         class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
@@ -182,8 +185,11 @@
                                 <li class="active dropdown yamm-fw"> <a href="{{ url('/') }}" data-hover="dropdown"
                                         class="dropdown-toggle" data-toggle="dropdown"><i
                                             class="fa-solid fa-house-blank"></i>
-                                        @if (session()->get('language') == 'japan') ホーム  @else Trang Chủ  @endif
-
+                                        @if (session()->get('language') == 'japan')
+                                            ホーム
+                                        @else
+                                            Trang Chủ
+                                        @endif
                                     </a> </li>
                                 {{-- Get Categoris --}}
                                 @php
@@ -192,7 +198,11 @@
                                 @foreach ($categories as $category)
                                     <li class="dropdown yamm mega-menu"> <a href="{{ url('/') }}"
                                             data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
-                                            @if (session()->get('language') == 'japan') {{ $category->category_name_ja }}  @else {{ $category->category_name_en }}  @endif
+                                            @if (session()->get('language') == 'japan')
+                                                {{ $category->category_name_ja }}
+                                            @else
+                                                {{ $category->category_name_en }}
+                                            @endif
                                         </a>
                                         <ul class="dropdown-menu container">
                                             <li>
@@ -206,11 +216,18 @@
                                                         @endphp
                                                         @foreach ($subcategories as $subcategory)
                                                             <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                                <h2 class="title">
-                                                                    @if (session()->get('language') == 'japan')  {{ $subcategory->subcategory_name_ja }}  @else  {{ $subcategory->subcategory_name_en }}  @endif
+                                                                <a
+                                                                    href="{{ url('subcategory/product/' . $subcategory->id . '/' . $subcategory->subcategory_slug_en) }}">
+                                                                    <h2 class="title">
+                                                                        @if (session()->get('language') == 'japan')
+                                                                            {{ $subcategory->subcategory_name_ja }}
+                                                                        @else
+                                                                            {{ $subcategory->subcategory_name_en }}
+                                                                        @endif
 
-                                                                </h2>
-                                                        {{-- Get SubSubCategoris --}}
+                                                                    </h2>
+                                                                </a>
+                                                                {{-- Get SubSubCategoris --}}
 
                                                                 @php
                                                                     $subsubcategories = App\Models\SubSubCategory::where('subcategory_id', $subcategory->id)
@@ -220,8 +237,12 @@
                                                                 @foreach ($subsubcategories as $subsubcategory)
                                                                     <ul class="links">
                                                                         <li><a style="text-transform:capitalize"
-                                                                                href="#">
-                                                                                @if (session()->get('language') == 'japan')   {{ $subsubcategory->subsubcategory_name_ja }}  @else   {{ $subsubcategory->subsubcategory_name_en }}  @endif
+                                                                                href="{{ url('subsubcategory/product/' . $subsubcategory->id . '/' . $subsubcategory->subsubcategory_slug_en) }}">
+                                                                                @if (session()->get('language') == 'japan')
+                                                                                    {{ $subsubcategory->subsubcategory_name_ja }}
+                                                                                @else
+                                                                                    {{ $subsubcategory->subsubcategory_name_en }}
+                                                                                @endif
                                                                             </a>
                                                                         </li>
                                                                     </ul>
