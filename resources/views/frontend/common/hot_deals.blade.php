@@ -1,5 +1,12 @@
 <div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
-    <h3 class="section-title">hot deals</h3>
+    <h3 class="section-title">
+        @if (session()->get('language') == 'japan')
+            ホットディール
+        @else
+            Ưu Đãi Lớn
+        @endif
+
+    </h3>
     <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
         @foreach ($hot_deals as $product)
             <div class="item">

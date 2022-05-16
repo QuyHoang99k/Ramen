@@ -1,7 +1,5 @@
 @extends('admin.admin_master')
 @section('admin')
-
-
     <!-- Content Wrapper. Contains page content -->
 
     <div class="container-full">
@@ -34,7 +32,7 @@
                                             <th>Số Lượng </th>
                                             <th>Triết khấu </th>
                                             <th>Hiện thỉ </th>
-                                            <th>Điều khiển</th>
+                                            <th>Quản lý sản phẩm</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,7 +49,6 @@
                                                     @if ($item->discount_price == null)
                                                         <span class="badge badge-pill badge-danger">không có chiết
                                                             khấu</span>
-
                                                     @else
                                                         @php
                                                             $amount = $item->selling_price - $item->discount_price;
@@ -70,7 +67,7 @@
                                                 </td>
 
 
-                                                <td width="30%">
+                                                <td width="25%">
                                                     <a href="{{ route('product.edit', $item->id) }}"
                                                         class="btn btn-primary" title="Product Details Data"><i
                                                             class="fa fa-eye"></i> </a>
@@ -120,8 +117,4 @@
         <!-- /.content -->
 
     </div>
-
-
-
-
 @endsection

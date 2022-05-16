@@ -1,11 +1,11 @@
 @extends('admin.admin_master')
 @section('admin')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <div class="container-full">
         <section class="content">
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Add Product </h4>
+                    <h4 class="box-title">Thêm Sản Phẩm </h4>
                 </div>
                 <div class="box-body">
                     <div class="row">
@@ -18,10 +18,10 @@
                                             <!-- start 1st row  -->
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Brand Select <span class="text-danger">*</span></h5>
+                                                    <h5>Chọn Khu Vực <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="brand_id" class="form-control" required="">
-                                                            <option value="" selected="" disabled="">Select Brand</option>
+                                                            <option value="" selected="" disabled="">Khu Vực</option>
                                                             @foreach ($brands as $brand)
                                                                 <option value="{{ $brand->id }}">
                                                                     {{ $brand->brand_name_en }}</option>
@@ -35,10 +35,10 @@
                                             </div> <!-- end col md 4 -->
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Category Select <span class="text-danger">*</span></h5>
+                                                    <h5>Chọn Danh Mục<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="category_id" class="form-control" required="">
-                                                            <option value="" selected="" disabled="">Select Category
+                                                            <option value="" selected="" disabled="">Danh Mục
                                                             </option>
                                                             @foreach ($categories as $category)
                                                                 <option value="{{ $category->id }}">
@@ -55,10 +55,10 @@
                                             <div class="col-md-4">
 
                                                 <div class="form-group">
-                                                    <h5>SubCategory Select <span class="text-danger">*</span></h5>
+                                                    <h5>Chọn Danh Mục Con <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="subcategory_id" class="form-control" required="">
-                                                            <option value="" selected="" disabled="">Select SubCategory
+                                                            <option value="" selected="" disabled="">Danh Mục Con
                                                             </option>
 
                                                         </select>
@@ -79,10 +79,10 @@
                                             <div class="col-md-4">
 
                                                 <div class="form-group">
-                                                    <h5>SubSubCategory Select <span class="text-danger">*</span></h5>
+                                                    <h5>Chọn Danh Mục Cháu<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="subsubcategory_id" class="form-control" required="">
-                                                            <option value="" selected="" disabled="">Select SubSubCategory
+                                                            <option value="" selected="" disabled="">Danh Mục Cháu
                                                             </option>
 
                                                         </select>
@@ -99,8 +99,8 @@
                                                 <div class="form-group">
                                                     <h5>Tên Sản Phẩm <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" value="{{ old('product_name_en') }}" name="product_name_en" class="form-control"
-                                                            required="">
+                                                        <input type="text" value="{{ old('product_name_en') }}"
+                                                            name="product_name_en" class="form-control" required="">
                                                         @error('product_name_en')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -115,8 +115,8 @@
                                                 <div class="form-group">
                                                     <h5>Tên Sản Phẩm Japan <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" value="{{ old('product_name_ja') }}"  name="product_name_ja" class="form-control"
-                                                            required="">
+                                                        <input type="text" value="{{ old('product_name_ja') }}"
+                                                            name="product_name_ja" class="form-control" required="">
                                                         @error('product_name_hin')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -136,8 +136,8 @@
                                                 <div class="form-group">
                                                     <h5> Mã Sản Phẩm <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" value="{{ old('product_code') }}"  name="product_code" class="form-control"
-                                                            required="">
+                                                        <input type="text" value="{{ old('product_code') }}"
+                                                            name="product_code" class="form-control" required="">
                                                         @error('product_code')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -151,8 +151,8 @@
                                                 <div class="form-group">
                                                     <h5>Số Lượng Sản Phẩm <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" value="{{ old('product_qty') }}"  name="product_qty" class="form-control"
-                                                            required="">
+                                                        <input type="text" value="{{ old('product_qty') }}"
+                                                            name="product_qty" class="form-control" required="">
                                                         @error('product_qty')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -165,9 +165,9 @@
                                             <div class="col-md-4">
 
                                                 <div class="form-group">
-                                                    <h5>Product Tags En <span class="text-danger">*</span></h5>
+                                                    <h5>Tags Sản Phẩm Tiếng Việt<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text"   name="product_tags_en" class="form-control"
+                                                        <input type="text" name="product_tags_en" class="form-control"
                                                             value="Lorem,Ipsum,Amet" data-role="tagsinput" required="">
                                                         @error('product_tags_en')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -189,7 +189,7 @@
                                             <div class="col-md-4">
 
                                                 <div class="form-group">
-                                                    <h5>Product Tags Japan <span class="text-danger">*</span></h5>
+                                                    <h5>Tags Sản Phẩm Tiếng Nhật<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_tags_ja" class="form-control"
                                                             value="Lorem,Ipsum,Amet" data-role="tagsinput" required="">
@@ -201,7 +201,7 @@
 
                                             </div> <!-- end col md 4 -->
 
-                                            <div class="col-md-4">
+                                            {{-- <div class="col-md-4">
 
                                                 <div class="form-group">
                                                     <h5>Product Size En <span class="text-danger">*</span></h5>
@@ -215,14 +215,12 @@
                                                 </div>
 
                                             </div> <!-- end col md 4 -->
-
-
                                             <div class="col-md-4">
 
                                                 <div class="form-group">
                                                     <h5>Product Size Japan <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text"  name="product_size_ja" class="form-control"
+                                                        <input type="text" name="product_size_ja" class="form-control"
                                                             value="Small,Midium,Large" data-role="tagsinput" required="">
                                                         @error('product_size_hin')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -230,20 +228,14 @@
                                                     </div>
                                                 </div>
 
-                                            </div> <!-- end col md 4 -->
-
-                                        </div> <!-- end 4th row  -->
-
-
-                                        <div class="row">
+                                            </div> <!-- end col md 4 --> --}}
                                             <!-- start 5th row  -->
                                             <div class="col-md-4">
-
                                                 <div class="form-group">
-                                                    <h5>Product Selling Price <span class="text-danger">*</span></h5>
+                                                    <h5>Giá Gốc Sản Phẩm <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" value="{{ old('selling_price') }}" name="selling_price" class="form-control"
-                                                            required="">
+                                                        <input type="text" value="{{ old('selling_price') }}"
+                                                            name="selling_price" class="form-control" required="">
                                                         @error('selling_price')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -254,10 +246,10 @@
                                             <div class="col-md-4">
 
                                                 <div class="form-group">
-                                                    <h5>Product Discount Price <span class="text-danger">*</span></h5>
+                                                    <h5>Giá Sau Giảm <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" value="{{ old('discount_price') }}" name="discount_price" class="form-control"
-                                                            required="">
+                                                        <input type="text" value="{{ old('discount_price') }}"
+                                                            name="discount_price" class="form-control" required="">
                                                         @error('discount_price')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -265,6 +257,11 @@
                                                 </div>
 
                                             </div> <!-- end col md 4 -->
+                                        </div> <!-- end 4th row  -->
+
+
+                                        <div class="row">
+
                                         </div> <!-- end 5th row  -->
 
 
@@ -277,7 +274,7 @@
                                             <div class="col-md-4">
 
                                                 <div class="form-group">
-                                                    <h5>Main Thambnail <span class="text-danger">*</span></h5>
+                                                    <h5>Ảnh Chính<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="file" name="product_thambnail" class="form-control"
                                                             onChange="mainThamUrl(this)" required="">
@@ -294,7 +291,7 @@
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Multiple Image <span class="text-danger">*</span></h5>
+                                                    <h5>Ảnh Phụ Đính Kèm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="file" name="multi_img[]" class="form-control"
                                                             multiple="" id="multiImg" required="">
@@ -318,11 +315,10 @@
                                             <div class="col-md-6">
 
                                                 <div class="form-group">
-                                                    <h5>Short Description English <span class="text-danger">*</span>
+                                                    <h5>Mô Tả Sản Phẩm Tiếng Việt<span class="text-danger">*</span>
                                                     </h5>
                                                     <div class="controls">
-                                                        <textarea style="resize: none" name="short_descp_en" id="textarea"
-                                                            class="form-control" required
+                                                        <textarea style="resize: none" name="short_descp_en" id="textarea" class="form-control" required
                                                             placeholder="Textarea text"></textarea>
                                                     </div>
                                                 </div>
@@ -332,10 +328,9 @@
                                             <div class="col-md-6">
 
                                                 <div class="form-group">
-                                                    <h5>Short Description Japan <span class="text-danger">*</span></h5>
+                                                    <h5>Mô Tả Sản Phẩm Tiếng Nhật<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea style="resize: none" name="short_descp_ja" id="textarea"
-                                                            class="form-control" required
+                                                        <textarea style="resize: none" name="short_descp_ja" id="textarea" class="form-control" required
                                                             placeholder="Textarea text"></textarea>
                                                     </div>
                                                 </div>
@@ -354,12 +349,11 @@
                                             <div class="col-md-6">
 
                                                 <div class="form-group">
-                                                    <h5>Long Description English <span class="text-danger">*</span></h5>
+                                                    <h5>Mô Tả Chi Tiết Sản Phẩm Tiếng Việt<span
+                                                            class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea id="editor1" name="long_descp_en" rows="10" cols="80"
-                                                            required="">
-                                                                          Long Description English
-                                                                              </textarea>
+                                                        <textarea id="editor1" name="long_descp_en" rows="10" cols="80">
+                                                        </textarea>
                                                     </div>
                                                 </div>
 
@@ -368,11 +362,11 @@
                                             <div class="col-md-6">
 
                                                 <div class="form-group">
-                                                    <h5>Long Description Japan <span class="text-danger">*</span></h5>
+                                                    <h5>Mô Tả Chi Tiết Sản Phẩm Tiếng Nhật<span
+                                                            class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea style="resize: none" id="editor2" name="long_descp_ja" rows="10" cols="80">
-                                                                          Long Description Japan
-                                                                              </textarea>
+                                                        <textarea id="editor2" name="long_descp_ja" rows="10" cols="80">
+</textarea>
                                                     </div>
                                                 </div>
                                             </div> <!-- end col md 6 -->
@@ -425,7 +419,7 @@
                                         </div> <!-- end col md 4 -->
                                         <div class="text-xs-right">
                                             <input type="submit" class="btn btn-rounded btn-primary mb-5"
-                                                value="Add Product">
+                                                value="Thêm Sản Phẩm">
                                         </div>
                             </form>
 
@@ -536,5 +530,4 @@
             });
         });
     </script>
-
 @endsection

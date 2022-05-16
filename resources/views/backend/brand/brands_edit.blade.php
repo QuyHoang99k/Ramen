@@ -1,7 +1,5 @@
 @extends('admin.admin_master')
 @section('admin')
-
-
     <!-- Content Header (Page header) -->
     <div class="content-header">
 
@@ -21,7 +19,7 @@
                                 <input type="hidden" name="id" value="{{ $brand->id }}">
                                 <input type="hidden" name="old_image" value="{{ $brand->brand_image }}">
                                 <div class="form-group">
-                                    <h5>Brand Name English <span class="text-danger">*</span></h5>
+                                    <h5>Tên Khu Vực Tiếng Việt<span class="text-danger">*</span></h5>
                                     <div class="controls">
                                         <input type="text" value="{{ $brand->brand_name_en }}" name="brand_name_en"
                                             class="form-control">
@@ -31,7 +29,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h5>Brand Name Ja <span class="text-danger">*</span></h5>
+                                    <h5>Tên Khu Vực Tiếng Nhật<span class="text-danger">*</span></h5>
                                     <div class="controls">
                                         <input type="text" value="{{ $brand->brand_name_ja }}" name="brand_name_ja"
                                             class="form-control">
@@ -41,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h5>Brand Image <span class="text-danger">*</span></h5>
+                                    <h5>Ảnh Khu Vực<span class="text-danger">*</span></h5>
                                     <div class="controls">
                                         <input type="file" name="brand_image" class="form-control">
                                         <img class="mt-2" src="{{ asset($brand->brand_image) }}" height="100"
@@ -63,6 +61,4 @@
 
     </section>
     </div>
-
-
 @endsection

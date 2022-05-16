@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('backend/css/skin_color.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     {{-- <link href="{{ asset('backend/css/all.min.css') }}" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
 </head>
 
@@ -46,13 +48,13 @@
     <script src="{{ asset('/assets/vendor_components/datatable/datatables.min.js') }}"></script>
     <script src="{{ asset('backend/js/pages/data-table.js') }}"></script>
 
-<!-- /// Tgas Input Script -->
-<script src="{{ asset('../assets/vendor_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js') }}"></script>
+    <!-- /// Tgas Input Script -->
+    <script src="{{ asset('../assets/vendor_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js') }}"></script>
 
-<!-- // CK EDITOR  -->
-<script src="{{ asset('../assets/vendor_components/ckeditor/ckeditor.js') }}"></script>
-<script src="{{ asset('../assets/vendor_plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js') }}"></script>
-<script src="{{ asset('backend/js/pages/editor.js') }}"></script>
+    <!-- // CK EDITOR  -->
+    <script src="{{ asset('../assets/vendor_components/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('../assets/vendor_plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js') }}"></script>
+    <script src="{{ asset('backend/js/pages/editor.js') }}"></script>
 
 
 
@@ -90,6 +92,9 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('backend/js/code.js') }}"></script>
 
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61a33f874dee873e"></script>
 
 </body>
 

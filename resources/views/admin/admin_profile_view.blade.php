@@ -13,7 +13,8 @@
               <a href="{{ route('admin.profile.edit') }}" style="float: right;" class="btn btn-rounded btn-success mb-5">Edit Profile</a>
             </div>
             <div class="widget-user-image">
-              <img class="rounded-circle" src="{{ (!empty($adminData->profile_photo_path )) ? url ('upload/admin_images/'.$adminData->profile_photo_path):url('upload/123.jpg') }}" alt="User Avatar">
+                <img class="rounded-circle" src="{{ asset($adminData->profile_photo_path ) }}" alt="User Avatar">
+
             </div>
             <div class="box-footer">
               <div class="row">

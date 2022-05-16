@@ -1,7 +1,5 @@
 @extends('admin.admin_master')
 @section('admin')
-
-
     <!-- Content Wrapper. Contains page content -->
 
     <div class="container-full">
@@ -21,7 +19,7 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Edit SubCategory </h3>
+                            <h3 class="box-title">Sửa Danh Mục Con </h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -34,10 +32,10 @@
                                     <input type="hidden" name="id" value="{{ $subcategory->id }}">
 
                                     <div class="form-group">
-                                        <h5>Category Select <span class="text-danger">*</span></h5>
+                                        <h5>Chọn Danh Mục <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <select name="category_id" class="form-control">
-                                                <option value="" selected="" disabled="">Select Category</option>
+                                                <option value="" selected="" disabled="">Danh Mục </option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}"
                                                         {{ $category->id == $subcategory->category_id ? 'selected' : '' }}>
@@ -52,7 +50,7 @@
 
 
                                     <div class="form-group">
-                                        <h5>SubCategory English <span class="text-danger">*</span></h5>
+                                        <h5>Danh Mục Con Tiếng Việt <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="subcategory_name_en" class="form-control"
                                                 value="{{ $subcategory->subcategory_name_en }}">
@@ -64,7 +62,7 @@
 
 
                                     <div class="form-group">
-                                        <h5>SubCategory Japan <span class="text-danger">*</span></h5>
+                                        <h5>Danh Mục Con Tiếng Nhật <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="subcategory_name_ja" class="form-control"
                                                 value="{{ $subcategory->subcategory_name_ja }}">
@@ -76,7 +74,7 @@
 
 
                                     <div class="text-xs-right">
-                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update">
+                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Cập Nhật">
                                     </div>
                                 </form>
 
@@ -100,8 +98,4 @@
         <!-- /.content -->
 
     </div>
-
-
-
-
 @endsection

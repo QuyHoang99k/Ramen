@@ -6,9 +6,12 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
 use App\Models\MultiImg;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -17,6 +20,7 @@ class IndexController extends Controller
 {
     public function index()
     {
+        $blogs = BlogPost::latest()->get();
         $products = Product::where('status', 1)->orderBy('id', 'DESC')->limit(6)->get();
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
@@ -29,7 +33,7 @@ class IndexController extends Controller
         $skip_product_0 = Product::where('status', 1)->where('category_id', $skip_category_0->id)->orderBy('id', 'DESC')->get();
 
 
-        return view('frontend.index', compact('categories', 'sliders', 'products', 'featured', 'hot_deals', 'special_offer', 'special_deals', 'skip_category_0', 'skip_product_0'));
+        return view('frontend.index', compact('categories', 'sliders', 'products', 'featured', 'hot_deals', 'special_offer', 'special_deals', 'skip_category_0', 'skip_product_0','blogs'));
     }
     public function UserLogout()
     {
@@ -120,15 +124,15 @@ class IndexController extends Controller
     {
         $products = Product::where('status', 1)->where('subcategory_id', $subcat_id)->orderBy('id', 'DESC')->paginate(3);
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
-
-        return view('frontend.product.subcategory_view', compact('products', 'categories'));
+        $breadsubcat = SubCategory::with(['category'])->where('id',$subcat_id)->get();
+        return view('frontend.product.subcategory_view', compact('products', 'categories','breadsubcat'));
     }
     public function SubSubCatWiseProduct($subsubcat_id, $slug)
     {
         $products = Product::where('status', 1)->where('subsubcategory_id', $subsubcat_id)->orderBy('id', 'DESC')->paginate(3);
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
-
-        return view('frontend.product.subsubcategory_view', compact('products', 'categories'));
+        $breadsubsubcat = SubSubCategory::with(['category','subcategory'])->where('id',$subsubcat_id)->get();
+        return view('frontend.product.subsubcategory_view', compact('products', 'categories','breadsubsubcat'));
     }
     public function ProductViewAjax($id)
     {
@@ -136,5 +140,26 @@ class IndexController extends Controller
         return response()->json(array(
             'product' => $product,
         ));
+    }
+
+
+    public function ProductSearch(Request $request)
+    {
+        $request->validate(["search"=>"required"]);
+        $item = $request->search;
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+
+        $products = Product::where('product_name_en','LIKE',"%$item%")->get();
+        return view('frontend.product.search',compact('products','categories'));
+    }
+
+    public function SearchProduct(Request $request)
+    {
+        $request->validate(["search" => "required"]);
+
+		$item = $request->search;
+
+		$products = Product::where('product_name_en','LIKE',"%$item%")->select('product_name_en','product_thambnail','selling_price','id','product_slug_en')->limit(5)->get();
+		return view('frontend.product.search_product',compact('products'));
     }
 }

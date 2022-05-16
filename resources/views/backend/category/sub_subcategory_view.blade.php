@@ -7,7 +7,7 @@
                 <div class="col-8">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Sub->SubCategory List <span class="badge badge-pill badge-danger">
+                            <h3 class="box-title">Danh Sách Danh Mục Con <span class="badge badge-pill badge-danger">
                                     {{ count($subsubcategory) }} </span></h3>
                         </div>
                         <div class="box-body">
@@ -15,16 +15,17 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Category </th>
-                                            <th>SubCategory Name</th>
-                                            <th>Sub-Subcategory English </th>
-                                            <th>Action</th>
+                                            <th>Thuộc Danh Mục </th>
+                                            <th>Danh Mục Nhỏ </th>
+                                            <th>Danh Mục Con Tiếng Việt </th>
+                                            <th>Quản Lý </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($subsubcategory as $item)
                                             <tr>
-                                                <td> {{ $item['category']['category_name_en'] }} </td>
+                                                <td style="text-transform: uppercase">
+                                                    {{ $item['category']['category_name_en'] }} </td>
                                                 <td>{{ $item['subcategory']['subcategory_name_en'] }}</td>
                                                 <td>{{ $item->subsubcategory_name_en }}</td>
                                                 <td width="30%">
@@ -47,17 +48,17 @@
                 <div class="col-4">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Add Sub-SubCategory </h3>
+                            <h3 class="box-title">Thêm Mới Danh Mục Con </h3>
                         </div>
                         <div class="box-body">
                             <div class="table-responsive">
                                 <form method="post" action="{{ route('subsubcategory.store') }}">
                                     @csrf
                                     <div class="form-group">
-                                        <h5>Category Select <span class="text-danger">*</span></h5>
+                                        <h5>Chọn Danh Mục <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <select name="category_id" class="form-control">
-                                                <option value="" selected="" disabled="">Select Category</option>
+                                                <option value="" selected="" disabled="">Danh Mục </option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">
                                                         {{ $category->category_name_en }}</option>
@@ -69,10 +70,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h5>SubCategory Select <span class="text-danger">*</span></h5>
+                                        <h5>Chọn Danh Mục Nhỏ <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <select name="subcategory_id" class="form-control">
-                                                <option value="" selected="" disabled="">Select SubCategory</option>
+                                                <option value="" selected="" disabled="">Danh Mục Nhỏ </option>
 
                                             </select>
                                             @error('subcategory_id')
@@ -81,7 +82,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h5>Sub-SubCategory English <span class="text-danger">*</span></h5>
+                                        <h5>Danh Mục Con Tiếng Việt <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="subsubcategory_name_en" class="form-control">
                                             @error('subsubcategory_name_en')
@@ -90,7 +91,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h5>Sub-SubCategory Japan <span class="text-danger">*</span></h5>
+                                        <h5>Danh Mục Con Tiếng Nhật <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="subsubcategory_name_ja" class="form-control">
                                             @error('subsubcategory_name_ja')
@@ -99,7 +100,7 @@
                                         </div>
                                     </div>
                                     <div class="text-xs-right">
-                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add New">
+                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Thêm Mới">
                                     </div>
                                 </form>
                             </div>

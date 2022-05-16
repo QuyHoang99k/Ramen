@@ -1,30 +1,16 @@
 @extends('admin.admin_master')
 @section('admin')
-
-
     <!-- Content Wrapper. Contains page content -->
-
     <div class="container-full">
         <!-- Content Header (Page header) -->
-
-
         <!-- Main content -->
         <section class="content">
             <div class="row">
-
-
-
-
-
-
                 <!--   ------------ Edit Slider Page -------- -->
-
-
                 <div class="col-12">
-
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Edit Slider </h3>
+                            <h3 class="box-title">Cập Nhật Slider </h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -37,7 +23,7 @@
                                     <input type="hidden" name="old_image" value="{{ $sliders->slider_img }}">
 
                                     <div class="form-group">
-                                        <h5>Slider Title <span class="text-danger">*</span></h5>
+                                        <h5>Tiêu Đề Slider <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="title" class="form-control"
                                                 value="{{ $sliders->title }}">
@@ -47,7 +33,7 @@
 
 
                                     <div class="form-group">
-                                        <h5>Slider Decription <span class="text-danger">*</span></h5>
+                                        <h5>Mô Tả Slider <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="description" class="form-control"
                                                 value="{{ $sliders->description }}">
@@ -58,11 +44,11 @@
 
 
                                     <div class="form-group">
-                                        <h5>Slider Image <span class="text-danger">*</span></h5>
+                                        <h5>Ảnh Slider <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="file" name="slider_img" class="form-control">
-                                            <img class="mt-2" src="{{ asset($sliders->slider_img) }}" height="150"
-                                            width="250" alt="">
+                                            <img class="mt-2" src="{{ asset($sliders->slider_img) }}"
+                                                height="150" width="250" alt="">
                                             @error('slider_img')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -71,7 +57,7 @@
 
 
                                     <div class="text-xs-right">
-                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update">
+                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Cập Nhật">
                                     </div>
                                 </form>
 
@@ -95,8 +81,4 @@
         <!-- /.content -->
 
     </div>
-
-
-
-
 @endsection

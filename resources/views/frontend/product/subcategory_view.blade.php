@@ -12,8 +12,21 @@
     <div class="container">
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
-                <li><a href="{{ url('/') }}">Home</a></li>
-                <li class='active'>Handbags</li>
+                <li><a href="#">Home</a></li>
+                @foreach ($breadsubcat as $item)
+                    @if (session()->get('language') == 'japan')
+                        <b class='active'>{{ $item->category->category_name_ja }}</b> /
+                    @else
+                        <b class='active'>{{ $item->category->category_name_en }}</b> /
+                    @endif
+                @endforeach
+                @foreach ($breadsubcat as $item)
+                    @if (session()->get('language') == 'japan')
+                        <b class='active'>{{ $item->subcategory_name_ja }}</b>
+                    @else
+                        <b class='active'>{{ $item->subcategory_name_en }}</b>
+                    @endif
+                @endforeach
             </ul>
         </div>
         <!-- /.breadcrumb-inner -->
@@ -68,7 +81,8 @@
 
                                                     @foreach ($subcategories as $subcategory)
                                                         <ul>
-                                                            <li><a  href="{{ url('subcategory/product/' . $subcategory->id . '/' . $subcategory->subcategory_slug_en) }}">
+                                                            <li><a
+                                                                    href="{{ url('subcategory/product/' . $subcategory->id . '/' . $subcategory->subcategory_slug_en) }}">
                                                                     @if (session()->get('language') == 'japan')
                                                                         {{ $subcategory->subcategory_name_ja }}
                                                                     @else
@@ -144,7 +158,8 @@
 
 
                         <div class="home-banner"> <img style="width: 263px"
-                                src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image"> </div>
+                                src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
+                        </div>
                     </div>
                     <!-- /.sidebar-filter -->
                 </div>
@@ -308,7 +323,8 @@
                                                         @else
                                                             <div class="product-price"> <span
                                                                     class="price">{{ number_format($product->discount_price) }}円</span>
-                                                                <span class="price-before-discount">{{ number_format($product->selling_price) }}円</span>
+                                                                <span
+                                                                    class="price-before-discount">{{ number_format($product->selling_price) }}円</span>
                                                             </div>
                                                         @endif
 
@@ -323,11 +339,15 @@
                                                         <div class="action">
                                                             <ul class="list-unstyled">
                                                                 <li class="add-cart-button btn-group">
-                                                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary icon"
-                                                                    type="button" title="Add Cart" onclick="productView(this.id)"
-                                                                    id="{{ $product->id }}"> <i class="fa fa-shopping-cart"></i> </button>
-                                                                <button class="btn btn-primary cart-btn" type="button">Add
-                                                                    to cart</button>
+                                                                    <button data-toggle="modal"
+                                                                        data-target="#exampleModal"
+                                                                        class="btn btn-primary icon" type="button"
+                                                                        title="Add Cart" onclick="productView(this.id)"
+                                                                        id="{{ $product->id }}"> <i
+                                                                            class="fa fa-shopping-cart"></i> </button>
+                                                                    <button class="btn btn-primary cart-btn"
+                                                                        type="button">Add
+                                                                        to cart</button>
                                                                 </li>
                                                                 <li class="lnk wishlist"> <a class="add-to-cart"
                                                                         href="detail.html" title="Wishlist"> <i
@@ -511,7 +531,7 @@
                         <div class="text-right">
                             <div class="pagination-container">
                                 <ul class="list-inline list-unstyled">
-                                    {{ $products->links()  }}
+                                    {{ $products->links() }}
                                 </ul>
                                 <!-- /.list-inline -->
                             </div>

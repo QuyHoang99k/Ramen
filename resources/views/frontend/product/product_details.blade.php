@@ -8,6 +8,13 @@
         {{ $product->product_name_en }}
     @endif
 @endsection
+
+<style>
+    .checked {
+        color: orange;
+    }
+
+</style>
 <!-- ============================================== HEADER : END ============================================== -->
 <div class="breadcrumb">
     <div class="container">
@@ -133,6 +140,15 @@
 
                             </div><!-- /.single-product-gallery -->
                         </div><!-- /.gallery-holder -->
+
+                        @php
+                            $reviewcount = App\Models\Review::where('product_id', $product->id)
+                                ->where('status', 1)
+                                ->latest()
+                                ->get();
+                            $avarage =  App\Models\Review::where('product_id', $product->id)
+                                ->where('status', 1)->avg('rating');
+                        @endphp
                         <div class='col-sm-6 col-md-7 product-info-block'>
                             <div class="product-info">
 
@@ -147,11 +163,47 @@
                                 <div class="rating-reviews m-t-20">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <div class="rating rateit-small"></div>
+
+                                            @if ($avarage == 0)
+                                                No Rating Yet
+                                            @elseif($avarage == 1 || $avarage < 2)
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            @elseif($avarage == 2 || $avarage < 3)
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            @elseif($avarage == 3 || $avarage < 4)
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            @elseif($avarage == 4 || $avarage < 5)
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                            @elseif($avarage == 5 || $avarage < 5)
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                            @endif
+
+
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="reviews">
-                                                <a href="#" class="lnk">(13 Reviews)</a>
+                                                <a href="#review1" class="lnk">({{ count($reviewcount) }}
+                                                    Đánh giá)</a>
                                             </div>
                                         </div>
                                     </div><!-- /.row -->
@@ -161,12 +213,19 @@
                                     <div class="row">
                                         <div class="col-sm-2">
                                             <div class="stock-box">
-                                                <span class="label">Availability :</span>
+                                                @if (session()->get('language') == 'japan')
+                                                    <span class="label">在庫あり</span>
+                                                @else
+                                                    <span class="label">Số Lượng :</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-sm-9">
                                             <div class="stock-box">
-                                                <span class="value">In Stock</span>
+                                                @if (session()->get('language') == 'japan')
+                                                @else
+                                                    <span class="value"> {{ $product->product_qty }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div><!-- /.row -->
@@ -244,13 +303,15 @@
                                         <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
                                         <div class="col-sm-7">
                                             <button type="submit" onclick="addToCart()" class="btn btn-primary"><i
-                                                    class="fa fa-shopping-cart inner-right-vs"></i> ADD TO
-                                                CART</button>
+                                                    class="fa fa-shopping-cart inner-right-vs"></i>Thêm vào giỏ
+                                                hàng</button>
                                         </div>
 
 
                                     </div><!-- /.row -->
                                 </div><!-- /.quantity-container -->
+
+
 
 
 
@@ -266,11 +327,12 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
-                                <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a>
+                                <li class="active"><a data-toggle="tab" href="#description">Mô Tả </a>
                                 </li>
-                                <li><a data-toggle="tab" href="#review">REVIEW</a></li>
+                                <li><a data-toggle="tab" href="#review">Đánh Giá </a></li>
                                 <li><a data-toggle="tab" href="#tags">TAGS</a></li>
                             </ul><!-- /.nav-tabs #product-tabs -->
+
                         </div>
                         <div class="col-sm-9">
 
@@ -289,133 +351,172 @@
                                     </div>
                                 </div><!-- /.tab-pane -->
 
-                                <div id="review" class="tab-pane">
-                                    <div class="product-tab">
+                                    <div id="review" class="tab-pane">
+                                        <div class="product-tab">
 
-                                        <div class="product-reviews">
-                                            <h4 class="title">Customer Reviews</h4>
-
-                                            <div class="reviews">
-                                                <div class="review">
-                                                    <div class="review-title"><span class="summary">We love
-                                                            this
-                                                            product</span><span class="date"><i
-                                                                class="fa fa-calendar"></i><span>1
-                                                                days ago</span></span></div>
-                                                    <div class="text">"Lorem ipsum dolor sit amet,
-                                                        consectetur adipiscing
-                                                        elit.Aliquam suscipit."</div>
-                                                </div>
-
-                                            </div><!-- /.reviews -->
-                                        </div><!-- /.product-reviews -->
+                                            <div class="product-reviews">
+                                                <h4 class="title">Đánh giá của khách hàng</h4>
+                                                @php
+                                                    $reviews = App\Models\Review::where('product_id', $product->id)
+                                                        ->latest()
+                                                        ->limit(5)
+                                                        ->get();
+                                                @endphp
 
 
+                                                <div class="reviews">
 
-                                        <div class="product-add-review">
-                                            <h4 class="title">Write your own review</h4>
-                                            <div class="review-table">
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="cell-label">&nbsp;</th>
-                                                                <th>1 star</th>
-                                                                <th>2 stars</th>
-                                                                <th>3 stars</th>
-                                                                <th>4 stars</th>
-                                                                <th>5 stars</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="cell-label">Quality</td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="1"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="2"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="3"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="4"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="5"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="cell-label">Price</td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="1"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="2"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="3"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="4"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="5"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="cell-label">Value</td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="1"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="2"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="3"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="4"></td>
-                                                                <td><input type="radio" name="quality"
-                                                                        class="radio" value="5"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table><!-- /.table .table-bordered -->
-                                                </div><!-- /.table-responsive -->
-                                            </div><!-- /.review-table -->
 
-                                            <div class="review-form">
-                                                <div class="form-container">
-                                                    <form role="form" class="cnt-form">
+                                                    @foreach ($reviews as $review)
+                                                        @if ($review->status == 0)
+                                                        @else
+                                                            <div class="review">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <img src="{{ !empty($review->user->profile_photo_path)? url('upload/user_images/' . $review->user->profile_photo_path): url('upload/123.jpg') }}"
+                                                                            style="border-radius: 50%; width: 40px;height:40px"
+                                                                            alt="">
+                                                                        <b> {{ $review->user->name }}</b>
 
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputName">Your Name <span
-                                                                            class="astk">*</span></label>
-                                                                    <input type="text" class="form-control txt"
-                                                                        id="exampleInputName" placeholder="">
-                                                                </div><!-- /.form-group -->
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputSummary">Summary <span
-                                                                            class="astk">*</span></label>
-                                                                    <input type="text" class="form-control txt"
-                                                                        id="exampleInputSummary" placeholder="">
-                                                                </div><!-- /.form-group -->
+                                                                        @if ($review->rating == null)
+                                                                        @elseif($review->rating == 1)
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                        @elseif($review->rating == 2)
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                        @elseif($review->rating == 3)
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                        @elseif($review->rating == 4)
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                        @elseif($review->rating == 5)
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="col-md-6"></div>
+                                                                </div> {{-- end row --}}
+                                                                <div class="review-title"><span
+                                                                        class="summary">{{ $review->summary }}</span><span
+                                                                        class="date"><i
+                                                                            class="fa fa-calendar"></i><span>{{ Carbon\Carbon::parse($review->created_at)->diffForHumans() }}</span></span>
+                                                                </div>
+                                                                <div class="text">{{ $review->comment }}
+                                                                </div>
                                                             </div>
+                                                        @endif
+                                                    @endforeach
 
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputReview">Review <span
-                                                                            class="astk">*</span></label>
-                                                                    <textarea class="form-control txt txt-review"
-                                                                        id="exampleInputReview" rows="4"
-                                                                        placeholder=""></textarea>
-                                                                </div><!-- /.form-group -->
-                                                            </div>
-                                                        </div><!-- /.row -->
+                                                </div><!-- /.reviews -->
+                                            </div><!-- /.product-reviews -->
 
-                                                        <div class="action text-right">
-                                                            <button class="btn btn-primary btn-upper">SUBMIT
-                                                                REVIEW</button>
-                                                        </div><!-- /.action -->
 
-                                                    </form><!-- /.cnt-form -->
-                                                </div><!-- /.form-container -->
-                                            </div><!-- /.review-form -->
 
-                                        </div><!-- /.product-add-review -->
+                                            <div class="product-add-review">
+                                                <h4 class="title">Viết nhận xét của bạn về sản phẩm</h4>
+                                                <div class="review-table">
 
-                                    </div><!-- /.product-tab -->
-                                </div><!-- /.tab-pane -->
+                                                </div><!-- /.review-table -->
+
+                                                <div class="review-form">
+                                                    @guest
+                                                        <p><b>Vui Lòng đăng nhập để bình luận sản phẩm <br><a
+                                                                    href="{{ route('login') }}">Đăng Nhập</a></b></p>
+                                                    @else
+                                                        <div class="form-container">
+                                                            <form role="form" class="cnt-form" method="post"
+                                                                action="{{ route('review.store') }}">
+                                                                @csrf
+                                                                <input type="hidden" name="product_id"
+                                                                    value="{{ $product->id }}">
+
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th class="cell-label">&nbsp;</th>
+                                                                            <th>1 sao</th>
+                                                                            <th>2 sao</th>
+                                                                            <th>3 sao</th>
+                                                                            <th>4 sao</th>
+                                                                            <th>5 sao</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="cell-label">Đánh giá sao</td>
+                                                                            <td><input type="radio" name="quality"
+                                                                                    class="radio" value="1"></td>
+                                                                            <td><input type="radio" name="quality"
+                                                                                    class="radio" value="2"></td>
+                                                                            <td><input type="radio" name="quality"
+                                                                                    class="radio" value="3"></td>
+                                                                            <td><input type="radio" name="quality"
+                                                                                    class="radio" value="4"></td>
+                                                                            <td><input type="radio" name="quality"
+                                                                                    class="radio" value="5"></td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputSummary">Mô tả <span
+                                                                                    class="astk">*</span></label>
+                                                                            <input type="text" name="summary"
+                                                                                class="form-control txt"
+                                                                                id="exampleInputSummary" placeholder="">
+                                                                        </div><!-- /.form-group -->
+                                                                    </div>
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputReview">Đánh giá chi
+                                                                                tiết
+                                                                                sản phẩm <span
+                                                                                    class="astk">*</span></label>
+                                                                            <textarea class="form-control txt txt-review" id="exampleInputReview" name="comment" rows="4"
+                                                                                placeholder=""></textarea>
+                                                                        </div><!-- /.form-group -->
+                                                                    </div>
+                                                                </div><!-- /.row -->
+
+                                                                <div class="action text-right">
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary btn-upper">Gửi
+                                                                        nhận xét
+                                                                    </button>
+                                                                </div><!-- /.action -->
+
+                                                            </form><!-- /.cnt-form -->
+                                                        </div><!-- /.form-container -->
+                                                    @endguest
+
+                                                </div><!-- /.review-form -->
+
+                                            </div><!-- /.product-add-review -->
+
+                                        </div><!-- /.product-tab -->
+                                    </div><!-- /.tab-pane -->
 
                                 <div id="tags" class="tab-pane">
                                     <div class="product-tag">
@@ -556,5 +657,9 @@
         </div><!-- /.row -->
     </div><!-- /.container -->
 </div><!-- /.body-content -->
+
+
+
+
 
 @endsection

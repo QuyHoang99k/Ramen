@@ -34,10 +34,11 @@ class ProductController extends Controller
         //     $digitalItem = date('YmdHis') . "." . $files->getClientOriginalExtension();
         //     $files->move($destinationPath, $digitalItem);
         // }
-        $image = $request->file('product_thambnail');
+        $image = $request->product_thambnail;
+        $path = 'upload/products/thambnail/';
         $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-        Image::make($image)->resize(917, 1000)->save(public_path('upload/products/thambnail/' . $name_gen));
-        $save_url = 'upload/products/thambnail/' . $name_gen;
+        Image::make($image)->resize(917, 1000)->save($path.$name_gen);
+        $save_url = $path.$name_gen;
 
         $product_id = Product::insertGetId([
             'brand_id' => $request->brand_id,
@@ -70,7 +71,7 @@ class ProductController extends Controller
             'product_thambnail' => $save_url,
             // 'digital_file' => $digitalItem,
             'status' => 1,
-            'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            'created_at' => Carbon::now(),
 
         ]);
         // Multiple Image Upload Start
@@ -78,9 +79,10 @@ class ProductController extends Controller
         $images = $request->file('multi_img');
         if ($request->hasFile('multi_img')) {
             foreach ($images as $img) {
+                $path_multi = 'upload/products/multi-image/';
                 $make_name = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
-                Image::make($img)->resize(917, 1000)->save(public_path('upload/products/multi-image/' . $make_name));
-                $uploadPath = 'upload/products/multi-image/' . $make_name;
+                Image::make($img)->resize(917, 1000)->save($path_multi.$make_name);
+                $uploadPath = $path_multi.$make_name;
                 MultiImg::insert([
                     'product_id' => $product_id,
                     'photo_name' => $uploadPath,
@@ -90,7 +92,7 @@ class ProductController extends Controller
         }
         // Een Multiple Image Upload Start
         $notification = array(
-            'message' => 'Product Inserted Successfully',
+            'message' => 'Thêm sản phẩm thành công',
             'alert-type' => 'success'
         );
 
@@ -145,7 +147,7 @@ class ProductController extends Controller
             'special_offer' => $request->special_offer,
             'special_deals' => $request->special_deals,
             'status' => 1,
-            'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            'created_at' => Carbon::now(),
 
         ]);
 
@@ -222,7 +224,7 @@ class ProductController extends Controller
     {
         Product::findOrFail($id)->update(['status' => 0]);
         $notification = array(
-            'message' => 'Product Inactive',
+            'message' => 'Ẩn Sản Phẩm',
             'alert-type' => 'success'
         );
 
@@ -232,7 +234,7 @@ class ProductController extends Controller
     {
         Product::findOrFail($id)->update(['status' => 1]);
         $notification = array(
-            'message' => 'Product Active',
+            'message' => 'Hiện Sản Phẩm',
             'alert-type' => 'success'
         );
 
@@ -257,5 +259,12 @@ class ProductController extends Controller
 
         return redirect()->back()->with($notification);
     } // end method
+
+
+    public function ProductStock()
+    {
+        $products = Product::latest()->get();
+        return view('backend.product.product_stock',compact('products'));
+    }
 
 }
