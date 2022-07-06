@@ -71,7 +71,7 @@ Route::prefix('user')->group(function () {
     Route::get('/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
     Route::get('/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
     Route::post('/profile/store', [IndexController::class, 'UserStore'])->name('user.profile.store');
-    Route::get('/change/password', [IndexController::class, 'UserChangePassword'])->name('user.change.password');
+    Route::get('/change/password', [IndexContrfoller::class, 'UserChangePassword'])->name('user.change.password');
     Route::post('/password/update', [IndexController::class, 'UserPasswordUpdate'])->name('user.password.update');
 });
 //Admin Brand All Routes
@@ -238,7 +238,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
 
     //Order Tracking Route
     Route::get('/order/tracking/{id}', [AllUserController::class, 'OrderTracking']);
-
 });
 
 // Frontend Coupon Option
@@ -288,7 +287,6 @@ Route::get('/blog/category/post/{category_id}', [HomeBlogController::class, 'Hom
 Route::prefix('setting')->group(function () {
     Route::get('/site', [SiteSettingController::class, 'SiteSetting'])->name('site.setting');
     Route::post('/site/update', [SiteSettingController::class, 'SiteSettingUpdate'])->name('update.sitesetting');
-
 });
 
 // Admin Return Order Routes
@@ -297,8 +295,6 @@ Route::prefix('return')->group(function () {
     Route::get('/admin/request', [ReturnController::class, 'ReturnRequest'])->name('return.request');
 
     Route::get('/admin/return/approve/{order_id}', [ReturnController::class, 'ReturnRequestApprove'])->name('return.approve');
-
-
 });
 
 // Frontend Products Reviews Routes

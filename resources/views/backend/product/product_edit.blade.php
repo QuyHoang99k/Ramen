@@ -294,7 +294,7 @@
                                                     <h5>Mô Tả Chi Tiết Sản Phẩm Tiếng Việt <span
                                                             class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea id="editor11" name="long_descp_en" rows="10" cols="80" required="">{!! $products->long_descp_en !!}</textarea>
+                                                        <textarea id="editor1" name="long_descp_en" rows="10" cols="80" required="">{!! $products->long_descp_en !!}</textarea>
                                                     </div>
                                                 </div>
 
@@ -304,7 +304,7 @@
                                                     <h5>Mô Tả Chi Tiết Sản Phẩm Tiếng Nhật <span
                                                             class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea id="editor22" name="long_descp_ja" rows="10" cols="80">{!! $products->long_descp_ja !!}
+                                                        <textarea id="editor2" name="long_descp_ja" rows="10" cols="80">{!! $products->long_descp_ja !!}
                                                             </textarea>
                                                     </div>
                                                 </div>
